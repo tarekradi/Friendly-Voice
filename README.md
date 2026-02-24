@@ -1,0 +1,86 @@
+# Friendly Voice - AAC Communicator
+
+## 🎯 Project Overview
+
+**Friendly Voice** is an Augmentative and Alternative Communication (AAC) application designed to empower non-verbal individuals, particularly children with autism or developmental delays, to communicate effectively. The app provides a highly customizable grid of buttons that, when tapped, speak words or phrases in both English and Egyptian Arabic.
+
+The app focuses on simplicity, portability, and bilingual support, allowing users to build sentences, navigate through categories (folders), and personalize their communication board with their own photos and colors.
+
+---
+
+## 📱 Features Implemented
+
+### 🎓 Interactive Onboarding
+- **Hole-Punch Tutorial**: A guided tour for first-time users that highlights key interface elements using a spotlight effect.
+- **Guided Path**: Steps users through building sentences, interacting with buttons, using folders, and accessing settings.
+
+### 🗣️ Bilingual Text-to-Speech (TTS)
+- **Dual Language Support**: Seamless switching between English (US) and Egyptian Arabic (ar-EG).
+- **Voice Selection**: Users can choose from multiple system-installed voices (Male, Female, regional accents) with human-readable names.
+- **Speech Controls**: Adjustable speech rate (speed) and pitch to suit the user's preference.
+- **Test Mode**: Built-in test button in settings to preview voice selections instantly.
+
+### 🖼️ Customizable Communication Grid
+- **Dynamic Buttons**: Add, edit, or delete buttons directly within the app.
+- **Personalized Visuals**: Support for custom images from the **Gallery**, **Camera**, or a built-in **AAC Symbol Search** (powered by ARASAAC).
+- **Color Coding**: Pick from a curated palette of colors to categorize buttons (e.g., green for actions, yellow for feelings).
+- **Button Text Font Size Control**: Choose between Small, Medium, or Large text for each button label.
+- **Button Text Alignment**: Adjust the vertical alignment of the text to Top, Center, or Bottom.
+- **Overlay Labels**: Smart text overlays ensure labels are readable even on top of custom photos.
+
+### 📂 Page & Folder Navigation
+- **Hierarchical Layout**: Create "Folders" that link to new pages, allowing for deep categorization of vocabulary.
+- **Flexible Grids**: Configure different grid dimensions (2x2, 3x3, 4x4, etc.) for each individual page.
+- **Navigation Controls**: Dedicated Home, Back, and Clear buttons for easy usage.
+
+### 🚀 In-App Updates
+- **Immediate Update Flow**: Automatically prompts users to install mandatory updates from the Google Play Store on launch.
+- **Seamless Resume**: Ensures that interrupted updates are resumed when the user returns to the app.
+
+### ⚖️ Trial & Monetization
+- **5-Day Free Trial**: Full access to all features for 5 days. 
+- **Firestore Integration**: Remote usage tracking using Firebase Firestore to manage trial periods and prevent "reinstall resets."
+- **One-Time Purchase**: "Unlock Forever" option ($0.99) to remove trial limits and support development.
+- **User-Friendly Reminders**: Daily launch notifications showing remaining trial days and a persistent status badge on the main screen.
+
+### 💾 Data Management
+- **Persistent Storage**: All vocabulary, pages, and settings are saved locally using a Room Database and DataStore.
+- **Import/Export**: Export the entire vocabulary as a `.cab` file for backup or to share across devices.
+- **Internal Image Handling**: Captured and picked images are copied to the app's internal storage to ensure they persist even if the original gallery item is deleted.
+
+---
+
+## 🏗️ Key Files & Responsibilities
+
+### 📁 UI Layer (`com.aac.communicator.ui`)
+- **`MainScreen.kt`**: The heart of the app. Handles the communication grid, the scrollable sentence bar, and main navigation logic.
+- **`SettingsScreen.kt`**: Provides the interface for language selection, TTS adjustments, voice selection, monetization status, and data import/export.
+- **`EditButtonScreen.kt`**: A comprehensive editor for individual buttons, including text fields, the color picker, image selection logic and AAC symbol integration.
+- **`TutorialOverlay.kt`**: Implements the "hole-punch" spotlight effect for the interactive onboarding experience.
+
+### 📁 Data Layer (`com.aac.communicator.data`)
+- **`AppDatabase.kt`**: The Room database definition for storing `Page` and `CommunicationButton` entities.
+- **`CommunicationRepository.kt`**: Manages data flow between the UI and the database, including the logic for vocabulary import/export transactions.
+- **`SettingsManager.kt`**: Uses Jetpack DataStore to persist user preferences like language, speed, and selected voice.
+- **`VocabularyExport.kt`**: A data model used to package the entire database for file sharing.
+
+### 📁 Services & Logic (`com.aac.communicator`)
+- **`UpdateManager.kt`**: Handles the Google Play In-App Update flow, ensuring users are always on the latest version.
+- **`TTSService.kt`**: A wrapper around the Android TextToSpeech engine. Handles language initialization, voice discovery, and the smart logic for generating readable voice names.
+- **`TrialManager.kt`**: Manages the trial logic, interfacing with Firebase Firestore to track installation dates and premium status.
+- **`MainActivity.kt`**: Handles the initial app state, including update checks, trial verification, the welcome/reminders system, and core app navigation.
+
+---
+
+## 👤 About the Author
+
+**Tarek Radi** is the lead developer behind **Friendly Voice**. With a passion for creating accessible technology, Tarek built this app to provide a modern, user-friendly solution for the AAC community.
+
+### 📩 Contact
+For support, feedback, or inquiries, you can reach Tarek at:
+- **Email**: [tarek.radi@gmail.com](mailto:tarek.radi@gmail.com)
+
+---
+
+**Version**: 1.0.0-Beta
+**Last Updated**: 2025-02-13
