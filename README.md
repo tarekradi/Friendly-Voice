@@ -13,6 +13,7 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 ### 🎓 Interactive Onboarding
 - **Hole-Punch Tutorial**: A guided tour for first-time users that highlights key interface elements using a spotlight effect.
 - **Guided Path**: Steps users through building sentences, interacting with buttons, using folders, and accessing settings.
+- **Auto-Initialization**: On the very first launch, the app automatically extracts and loads a high-quality default vocabulary from a `vocab.fva.zip` asset, including custom pages and images.
 
 ### 🗣️ Bilingual Text-to-Speech (TTS)
 - **Dual Language Support**: Seamless switching between English (US) and Egyptian Arabic (ar-EG).
@@ -22,6 +23,7 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 
 ### 🖼️ Customizable Communication Grid
 - **Dynamic Buttons**: Add, edit, or delete buttons directly within the app.
+- **Drag-and-Drop Reorganization**: Double-tap any button to "lift" it, then drag and drop it onto another button to swap their positions instantly.
 - **Personalized Visuals**: Support for custom images from the **Gallery**, **Camera**, or a built-in **AAC Symbol Search** (powered by ARASAAC).
 - **Color Coding**: Pick from a curated palette of colors to categorize buttons (e.g., green for actions, yellow for feelings).
 - **Button Text Font Size Control**: Choose between Small, Medium, or Large text for each button label.
@@ -31,6 +33,7 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 ### 📂 Page & Folder Navigation
 - **Hierarchical Layout**: Create "Folders" that link to new pages, allowing for deep categorization of vocabulary.
 - **Flexible Grids**: Configure different grid dimensions (2x2, 3x3, 4x4, etc.) for each individual page.
+- **Smart Page Selection**: When managing or selecting pages, the page names are sorted and the "<New Page>" option is conveniently placed at the top of the list.
 - **Navigation Controls**: Dedicated Home, Back, and Clear buttons for easy usage.
 
 ### 🚀 In-App Updates
@@ -45,7 +48,7 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 
 ### 💾 Data Management
 - **Persistent Storage**: All vocabulary, pages, and settings are saved locally using a Room Database and DataStore.
-- **Import/Export**: Export the entire vocabulary as a `.cab` file for backup or to share across devices.
+- **Import/Export**: Export or import your entire custom vocabulary as a `.fva` (Friendly Voice Archive) zip file, preserving all images and page layouts.
 - **Internal Image Handling**: Captured and picked images are copied to the app's internal storage to ensure they persist even if the original gallery item is deleted.
 
 ---
@@ -53,13 +56,14 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 ## 🏗️ Key Files & Responsibilities
 
 ### 📁 UI Layer (`com.aac.communicator.ui`)
-- **`MainScreen.kt`**: The heart of the app. Handles the communication grid, the scrollable sentence bar, and main navigation logic.
+- **`MainScreen.kt`**: The heart of the app. Handles the communication grid, the scrollable sentence bar, main navigation, and **drag-and-drop** swapping logic.
 - **`SettingsScreen.kt`**: Provides the interface for language selection, TTS adjustments, voice selection, monetization status, and data import/export.
-- **`EditButtonScreen.kt`**: A comprehensive editor for individual buttons, including text fields, the color picker, image selection logic and AAC symbol integration.
+- **`EditButtonScreen.kt`**: A comprehensive editor for individual buttons, including text fields, the color picker, image selection logic, and AAC symbol integration.
 - **`TutorialOverlay.kt`**: Implements the "hole-punch" spotlight effect for the interactive onboarding experience.
 
 ### 📁 Data Layer (`com.aac.communicator.data`)
 - **`AppDatabase.kt`**: The Room database definition for storing `Page` and `CommunicationButton` entities.
+- **`VocabInitializer.kt`**: Handles the critical first-run extraction of the `vocab.fva.zip` asset and populates the database.
 - **`CommunicationRepository.kt`**: Manages data flow between the UI and the database, including the logic for vocabulary import/export transactions.
 - **`SettingsManager.kt`**: Uses Jetpack DataStore to persist user preferences like language, speed, and selected voice.
 - **`VocabularyExport.kt`**: A data model used to package the entire database for file sharing.
@@ -68,7 +72,7 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 - **`UpdateManager.kt`**: Handles the Google Play In-App Update flow, ensuring users are always on the latest version.
 - **`TTSService.kt`**: A wrapper around the Android TextToSpeech engine. Handles language initialization, voice discovery, and the smart logic for generating readable voice names.
 - **`TrialManager.kt`**: Manages the trial logic, interfacing with Firebase Firestore to track installation dates and premium status.
-- **`MainActivity.kt`**: Handles the initial app state, including update checks, trial verification, the welcome/reminders system, and core app navigation.
+- **`MainActivity.kt`**: Handles the initial app state, including update checks, trial verification, initialization synchronization, and core app navigation.
 
 ---
 
@@ -82,5 +86,5 @@ For support, feedback, or inquiries, you can reach Tarek at:
 
 ---
 
-**Version**: 1.0.0-Beta
-**Last Updated**: 2025-02-13
+**Version**: 1.0.10-Beta
+**Last Updated**: 2025-02-14
