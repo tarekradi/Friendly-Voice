@@ -20,12 +20,15 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 
 ### 🗣️ Bilingual Text-to-Speech (TTS)
 - **Dual Language Support**: Seamless switching between English (US) and Egyptian Arabic (ar-EG).
-- **Voice Selection**: Users can choose from multiple system-installed voices (Male, Female, regional accents) with human-readable names.
+- **Friendly Voice Names**: Technical system voice identifiers are mapped to human-readable labels like "Egypt - Female" or "United States - Male".
+- **Dialect Identification**: Automatically detects and labels Arabic regional dialects (e.g., Gulf, Levant, Iraq, Egypt) from system voice metadata.
+- **Alphabetical Sorting**: Voice options are organized alphabetically by country and gender for easy selection.
 - **Speech Controls**: Adjustable speech rate (speed) and pitch to suit the user's preference.
 - **Test Mode**: Built-in test button in settings to preview voice selections instantly.
 
 ### 🖼️ Customizable Communication Grid
 - **Dynamic Buttons**: Add, edit, or delete buttons directly within the app.
+- **Automatic Bilingual Translation**: While editing a button, typing a label in English automatically generates the Arabic translation (and vice versa) using **Google ML Kit**.
 - **Drag-and-Drop Reorganization**: Double-tap any button to "lift" it, then drag and drop it onto another button to swap their positions instantly.
 - **Personalized Visuals**: Support for custom images from the **Gallery**, **Camera**, or a built-in **AAC Symbol Search** (powered by ARASAAC).
 - **Color Coding**: Pick from a curated palette of colors to categorize buttons (e.g., green for actions, yellow for feelings).
@@ -39,29 +42,14 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 - **Smart Page Selection**: When managing or selecting pages, the page names are sorted and the "<New Page>" option is conveniently placed at the top of the list.
 - **Navigation Controls**: Dedicated Home, Back, and Clear buttons for easy usage.
 
-### 🚀 In-App Updates
-- **Immediate Update Flow**: Automatically prompts users to install mandatory updates from the Google Play Store on launch.
-- **Seamless Resume**: Ensures that interrupted updates are resumed when the user returns to the app.
-
-### ⚖️ Trial & Monetization
-- **5-Day Free Trial**: Full access to all features for 5 days. 
-- **Firestore Integration**: Remote usage tracking using Firebase Firestore to manage trial periods and prevent "reinstall resets."
-- **One-Time Purchase**: "Unlock Forever" option ($0.99) to remove trial limits and support development.
-- **User-Friendly Reminders**: Daily launch notifications showing remaining trial days and a persistent status badge on the main screen.
-
-### 💾 Data Management
-- **Persistent Storage**: All vocabulary, pages, and settings are saved locally using a Room Database and DataStore.
-- **Import/Export**: Export or import your entire custom vocabulary as a `.fva` (Friendly Voice Archive) zip file, preserving all images and page layouts.
-- **Internal Image Handling**: Captured and picked images are copied to the app's internal storage to ensure they persist even if the original gallery item is deleted.
-
 ---
 
 ## 🏗️ Key Files & Responsibilities
 
 ### 📁 UI Layer (`com.aac.communicator.ui`)
 - **`MainScreen.kt`**: The heart of the app. Handles the communication grid, the scrollable sentence bar, main navigation, and **drag-and-drop** swapping logic. Includes the automated tutorial demonstration logic.
-- **`SettingsScreen.kt`**: Provides the interface for language selection, TTS adjustments, voice selection, monetization status, and data import/export. Now includes a "Run Tutorial Again" feature.
-- **`EditButtonScreen.kt`**: A comprehensive editor for individual buttons, including text fields, the color picker, image selection logic, and AAC symbol integration.
+- **`SettingsScreen.kt`**: Provides the interface for language selection, TTS adjustments, voice selection, monetization status, and data import/export. Includes a "Run Tutorial Again" feature for trial users.
+- **`EditButtonScreen.kt`**: A comprehensive editor for individual buttons. Integrates **Google ML Kit Translate** for real-time bilingual label generation and ARASAAC symbol integration.
 - **`TutorialOverlay.kt`**: Implements the "hole-punch" spotlight effect with enhanced, multi-styled text formatting for the interactive onboarding experience.
 
 ### 📁 Data Layer (`com.aac.communicator.data`)
@@ -69,11 +57,10 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 - **`VocabInitializer.kt`**: Handles the critical first-run extraction of the `vocab.fva.zip` asset and populates the database.
 - **`CommunicationRepository.kt`**: Manages data flow between the UI and the database, including the logic for vocabulary import/export transactions.
 - **`SettingsManager.kt`**: Uses Jetpack DataStore to persist user preferences like language, speed, and selected voice.
-- **`VocabularyExport.kt`**: A data model used to package the entire database for file sharing.
 
 ### 📁 Services & Logic (`com.aac.communicator`)
+- **`TTSService.kt`**: A wrapper around the Android TextToSpeech engine. Features advanced gender detection and dialect mapping to transform technical system strings into friendly labels.
 - **`UpdateManager.kt`**: Handles the Google Play In-App Update flow, ensuring users are always on the latest version.
-- **`TTSService.kt`**: A wrapper around the Android TextToSpeech engine. Handles language initialization, voice discovery, and the smart logic for generating readable voice names.
 - **`TrialManager.kt`**: Manages the trial logic, interfacing with Firebase Firestore to track installation dates and premium status.
 - **`MainActivity.kt`**: Handles the initial app state, including update checks, trial verification, initialization synchronization, and core app navigation.
 
@@ -89,5 +76,5 @@ For support, feedback, or inquiries, you can reach Tarek at:
 
 ---
 
-**Version**: 1.0.11-Beta
-**Last Updated**: 2025-02-14
+**Version**: 1.0.13-Beta
+**Last Updated**: 2025-02-15
