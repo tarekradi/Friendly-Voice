@@ -1,6 +1,6 @@
 # Friendly Voice - AAC Communicator
 
-## 🎯 Project Overview
+## 🎯 What is "Friendly Voice"?
 
 **Friendly Voice** is an Augmentative and Alternative Communication (AAC) application designed to empower non-verbal individuals, particularly children with autism or developmental delays, to communicate effectively. The app provides a highly customizable grid of buttons that, when tapped, speak words or phrases in both English and Egyptian Arabic.
 
