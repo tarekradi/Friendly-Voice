@@ -12,7 +12,10 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 
 ### 🎓 Interactive Onboarding
 - **Hole-Punch Tutorial**: A guided tour for first-time users that highlights key interface elements using a spotlight effect.
+- **Improved Tutorial Text**: Tutorial steps now feature clear, formatted text with bold titles and descriptive subtitles for better readability.
 - **Guided Path**: Steps users through building sentences, interacting with buttons, using folders, and accessing settings.
+- **Animated Demonstration**: The tutorial now includes a slow, smooth "flying" animation showing how to reorganize buttons using drag-and-drop.
+- **Re-run Tutorial**: Users in trial mode can re-trigger the interactive tutorial at any time from the Settings screen.
 - **Auto-Initialization**: On the very first launch, the app automatically extracts and loads a high-quality default vocabulary from a `vocab.fva.zip` asset, including custom pages and images.
 
 ### 🗣️ Bilingual Text-to-Speech (TTS)
@@ -56,10 +59,10 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 ## 🏗️ Key Files & Responsibilities
 
 ### 📁 UI Layer (`com.aac.communicator.ui`)
-- **`MainScreen.kt`**: The heart of the app. Handles the communication grid, the scrollable sentence bar, main navigation, and **drag-and-drop** swapping logic.
-- **`SettingsScreen.kt`**: Provides the interface for language selection, TTS adjustments, voice selection, monetization status, and data import/export.
+- **`MainScreen.kt`**: The heart of the app. Handles the communication grid, the scrollable sentence bar, main navigation, and **drag-and-drop** swapping logic. Includes the automated tutorial demonstration logic.
+- **`SettingsScreen.kt`**: Provides the interface for language selection, TTS adjustments, voice selection, monetization status, and data import/export. Now includes a "Run Tutorial Again" feature.
 - **`EditButtonScreen.kt`**: A comprehensive editor for individual buttons, including text fields, the color picker, image selection logic, and AAC symbol integration.
-- **`TutorialOverlay.kt`**: Implements the "hole-punch" spotlight effect for the interactive onboarding experience.
+- **`TutorialOverlay.kt`**: Implements the "hole-punch" spotlight effect with enhanced, multi-styled text formatting for the interactive onboarding experience.
 
 ### 📁 Data Layer (`com.aac.communicator.data`)
 - **`AppDatabase.kt`**: The Room database definition for storing `Page` and `CommunicationButton` entities.
@@ -86,5 +89,5 @@ For support, feedback, or inquiries, you can reach Tarek at:
 
 ---
 
-**Version**: 1.0.10-Beta
+**Version**: 1.0.11-Beta
 **Last Updated**: 2025-02-14
