@@ -45,27 +45,35 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 - **Smart Page Selection**: When managing or selecting pages, the page names are sorted and the "<New Page>" option is conveniently placed at the top of the list.
 - **Navigation Controls**: Dedicated Home, Back, and Clear buttons for easy usage.
 
+### 💰 Monetization & Trial System
+- **Cross-Device Trial Tracking**: Integrated **Firebase Firestore** to track trial periods and premium status reliably across app sessions.
+- **5-Day Free Trial**: Automatic registration of trial start dates with a real-time "Days Remaining" countdown.
+- **Unlock Forever**: Support for one-time premium purchases that instantly unlock full functionality.
+- **Robust Cloud-Local Sync**: Implements a "Firebase as Source of Truth" model, ensuring local app preferences (Jetpack DataStore) are automatically synchronized with cloud records on every startup.
+- **Unified Identity**: Uses **Firebase Installations ID** to ensure consistent tracking of purchases and trial status across different app screens (Main Screen, Settings, Paywall).
+
 ---
 
 ## 🏗️ Key Files & Responsibilities
 
 ### 📁 UI Layer (`com.friendlyvoice.aac.ui`)
 - **`MainScreen.kt`**: The heart of the app. Handles the communication grid, main navigation, and drag-and-drop logic. Now features **real-time word highlighting** in the sentence bar.
-- **`SettingsScreen.kt`**: Provides the interface for language selection, TTS adjustments, voice selection, monetization status, and data import/export. Now includes side-by-side language selection.
+- **`SettingsScreen.kt`**: Provides the interface for language selection, TTS adjustments, voice selection, monetization status, and data import/export. Now includes side-by-side language selection and premium activation.
 - **`EditButtonScreen.kt`**: A comprehensive editor for individual buttons. Integrates **Google ML Kit Translate** for real-time bilingual label generation.
 - **`TutorialOverlay.kt`**: Implements the "hole-punch" spotlight effect with enhanced text formatting.
 
-### 📁 Data Layer (`com.friendlyvoice,aac.data`)
+### 📁 Data Layer (`com.friendlyvoice.aac.data`)
 - **`AppDatabase.kt`**: The Room database definition for storing `Page` and `CommunicationButton` entities.
 - **`VocabInitializer.kt`**: Handles the critical first-run extraction of the `vocab.fva.zip` asset.
 - **`CommunicationRepository.kt`**: Manages data flow between the UI and the database.
-- **`SettingsManager.kt`**: Uses Jetpack DataStore to persist user preferences.
+- **`SettingsManager.kt`**: Uses Jetpack DataStore to persist user preferences, including the persistent `isPaidUser` flag.
+- **`AppSettings.kt`**: Data model for application preferences, now including monetization status.
 
 ### 📁 Services & Logic (`com.friendlyvoice.aac`)
 - **`TTSService.kt`**: A wrapper around the Android TextToSpeech engine. Features advanced gender/dialect mapping and **incremental highlighting support** for word-level synchronization.
 - **`UpdateManager.kt`**: Handles the Google Play In-App Update flow.
-- **`TrialManager.kt`**: Manages the trial logic, interfacing with Firebase Firestore.
-- **`MainActivity.kt`**: Handles the initial app state and core app navigation.
+- **`TrialManager.kt`**: Manages the trial logic, interfacing with Firebase Firestore for remote verification and registration.
+- **`MainActivity.kt`**: Handles the initial app state, core app navigation, and the critical Firebase-to-Local synchronization logic.
 
 ---
 
