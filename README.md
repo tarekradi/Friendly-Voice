@@ -49,19 +49,19 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 
 ## 🏗️ Key Files & Responsibilities
 
-### 📁 UI Layer (`com.aac.communicator.ui`)
+### 📁 UI Layer (`com.friendlyvoice.aac.ui`)
 - **`MainScreen.kt`**: The heart of the app. Handles the communication grid, main navigation, and drag-and-drop logic. Now features **real-time word highlighting** in the sentence bar.
 - **`SettingsScreen.kt`**: Provides the interface for language selection, TTS adjustments, voice selection, monetization status, and data import/export. Now includes side-by-side language selection.
 - **`EditButtonScreen.kt`**: A comprehensive editor for individual buttons. Integrates **Google ML Kit Translate** for real-time bilingual label generation.
 - **`TutorialOverlay.kt`**: Implements the "hole-punch" spotlight effect with enhanced text formatting.
 
-### 📁 Data Layer (`com.aac.communicator.data`)
+### 📁 Data Layer (`com.friendlyvoice,aac.data`)
 - **`AppDatabase.kt`**: The Room database definition for storing `Page` and `CommunicationButton` entities.
 - **`VocabInitializer.kt`**: Handles the critical first-run extraction of the `vocab.fva.zip` asset.
 - **`CommunicationRepository.kt`**: Manages data flow between the UI and the database.
 - **`SettingsManager.kt`**: Uses Jetpack DataStore to persist user preferences.
 
-### 📁 Services & Logic (`com.aac.communicator`)
+### 📁 Services & Logic (`com.friendlyvoice.aac`)
 - **`TTSService.kt`**: A wrapper around the Android TextToSpeech engine. Features advanced gender/dialect mapping and **incremental highlighting support** for word-level synchronization.
 - **`UpdateManager.kt`**: Handles the Google Play In-App Update flow.
 - **`TrialManager.kt`**: Manages the trial logic, interfacing with Firebase Firestore.
@@ -80,4 +80,4 @@ For support, feedback, or inquiries, you can reach Tarek at:
 ---
 
 **Version**: 1.0.15-Beta
-**Last Updated**: 2025-02-16
+**Last Updated**: 2025-02-24
