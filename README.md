@@ -20,6 +20,8 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 
 ### 🗣️ Bilingual Text-to-Speech (TTS)
 - **Dual Language Support**: Seamless switching between English (US) and Egyptian Arabic (ar-EG).
+- **Word-by-Word Highlighting**: Real-time visual feedback in the sentence bar, highlighting each word in red as it is spoken to improve engagement and learning.
+- **Smart Incremental Speech**: When a new button is tapped, the app speaks and highlights only the newly added word. Tapping the sentence bar reads back the entire phrase from the start.
 - **Friendly Voice Names**: Technical system voice identifiers are mapped to human-readable labels like "Egypt - Female" or "United States - Male".
 - **Dialect Identification**: Automatically detects and labels Arabic regional dialects (e.g., Gulf, Levant, Iraq, Egypt) from system voice metadata.
 - **Alphabetical Sorting**: Voice options are organized alphabetically by country and gender for easy selection.
@@ -38,6 +40,7 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 
 ### 📂 Page & Folder Navigation
 - **Hierarchical Layout**: Create "Folders" that link to new pages, allowing for deep categorization of vocabulary.
+- **Optional Folder Text tracking**: Users can choose whether folder names should be added to the sentence bar when navigated (disabled by default).
 - **Flexible Grids**: Configure different grid dimensions (2x2, 3x3, 4x4, etc.) for each individual page.
 - **Smart Page Selection**: When managing or selecting pages, the page names are sorted and the "<New Page>" option is conveniently placed at the top of the list.
 - **Navigation Controls**: Dedicated Home, Back, and Clear buttons for easy usage.
@@ -47,22 +50,22 @@ The app focuses on simplicity, portability, and bilingual support, allowing user
 ## 🏗️ Key Files & Responsibilities
 
 ### 📁 UI Layer (`com.aac.communicator.ui`)
-- **`MainScreen.kt`**: The heart of the app. Handles the communication grid, the scrollable sentence bar, main navigation, and **drag-and-drop** swapping logic. Includes the automated tutorial demonstration logic.
-- **`SettingsScreen.kt`**: Provides the interface for language selection, TTS adjustments, voice selection, monetization status, and data import/export. Includes a "Run Tutorial Again" feature for trial users.
-- **`EditButtonScreen.kt`**: A comprehensive editor for individual buttons. Integrates **Google ML Kit Translate** for real-time bilingual label generation and ARASAAC symbol integration.
-- **`TutorialOverlay.kt`**: Implements the "hole-punch" spotlight effect with enhanced, multi-styled text formatting for the interactive onboarding experience.
+- **`MainScreen.kt`**: The heart of the app. Handles the communication grid, main navigation, and drag-and-drop logic. Now features **real-time word highlighting** in the sentence bar.
+- **`SettingsScreen.kt`**: Provides the interface for language selection, TTS adjustments, voice selection, monetization status, and data import/export. Now includes side-by-side language selection.
+- **`EditButtonScreen.kt`**: A comprehensive editor for individual buttons. Integrates **Google ML Kit Translate** for real-time bilingual label generation.
+- **`TutorialOverlay.kt`**: Implements the "hole-punch" spotlight effect with enhanced text formatting.
 
 ### 📁 Data Layer (`com.aac.communicator.data`)
 - **`AppDatabase.kt`**: The Room database definition for storing `Page` and `CommunicationButton` entities.
-- **`VocabInitializer.kt`**: Handles the critical first-run extraction of the `vocab.fva.zip` asset and populates the database.
-- **`CommunicationRepository.kt`**: Manages data flow between the UI and the database, including the logic for vocabulary import/export transactions.
-- **`SettingsManager.kt`**: Uses Jetpack DataStore to persist user preferences like language, speed, and selected voice.
+- **`VocabInitializer.kt`**: Handles the critical first-run extraction of the `vocab.fva.zip` asset.
+- **`CommunicationRepository.kt`**: Manages data flow between the UI and the database.
+- **`SettingsManager.kt`**: Uses Jetpack DataStore to persist user preferences.
 
 ### 📁 Services & Logic (`com.aac.communicator`)
-- **`TTSService.kt`**: A wrapper around the Android TextToSpeech engine. Features advanced gender detection and dialect mapping to transform technical system strings into friendly labels.
-- **`UpdateManager.kt`**: Handles the Google Play In-App Update flow, ensuring users are always on the latest version.
-- **`TrialManager.kt`**: Manages the trial logic, interfacing with Firebase Firestore to track installation dates and premium status.
-- **`MainActivity.kt`**: Handles the initial app state, including update checks, trial verification, initialization synchronization, and core app navigation.
+- **`TTSService.kt`**: A wrapper around the Android TextToSpeech engine. Features advanced gender/dialect mapping and **incremental highlighting support** for word-level synchronization.
+- **`UpdateManager.kt`**: Handles the Google Play In-App Update flow.
+- **`TrialManager.kt`**: Manages the trial logic, interfacing with Firebase Firestore.
+- **`MainActivity.kt`**: Handles the initial app state and core app navigation.
 
 ---
 
@@ -76,5 +79,5 @@ For support, feedback, or inquiries, you can reach Tarek at:
 
 ---
 
-**Version**: 1.0.13-Beta
-**Last Updated**: 2025-02-15
+**Version**: 1.0.15-Beta
+**Last Updated**: 2025-02-16
